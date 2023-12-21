@@ -1,35 +1,24 @@
+<script>
+  import { onMount } from 'svelte';
+  let spanTotal = 25;
+</script>
+
+
 <div class="wrapper">
-  <div class="loader">
-    <span style="--i:25"></span>
-    <span style="--i:24"></span>
-    <span style="--i:23"></span>
-    <span style="--i:22"></span>
-    <span style="--i:21"></span>
-    <span style="--i:20"></span>
-    <span style="--i:19"></span>
-    <span style="--i:18"></span>
-    <span style="--i:17"></span>
-    <span style="--i:16"></span>
-    <span style="--i:15"></span>
-    <span style="--i:14"></span>
-    <span style="--i:13"></span>
-    <span style="--i:12"></span>
-    <span style="--i:11"></span>
-    <span style="--i:10"></span>
-    <span style="--i:9"></span>
-    <span style="--i:8"></span>
-    <span style="--i:7"></span>
-    <span style="--i:6"></span>
-    <span style="--i:5"></span>
-    <span style="--i:4"></span>
-    <span style="--i:3"></span>
-    <span style="--i:2"></span>
-    <span style="--i:1"></span>
+  <div class="loader"> 
+      {#each Array(spanTotal).fill().map((_, index) => index + 1) as i}
+         <span style="--i:{spanTotal - i + 1}"></span>
+      {/each}
   </div>
 </div>
 
-<style>
 
+<style>
+  :root {
+  --background: rgb(45,126,208);
+  --gradient: linear-gradient(90deg, rgba(45,126,208,0.8001794467787114) 23%, rgba(167,40,40,1) 92%);
+  --skewX: 45deg; 
+}
 .wrapper {
   transform: translateY(-5rem);
 }
@@ -49,7 +38,7 @@
     height: 200px;
     background: sandybrown;
     transform-origin: bottom;
-    transform: skewX(45deg);
+    transform: skewX(var(--skewX));
     filter: blur(20px);
   }
 
@@ -59,15 +48,14 @@
   display: block;
   width: 600px;
   height: 50px;
-  background: rgb(45,126,208);
-  background: linear-gradient(90deg, rgba(45,126,208,0.8001794467787114) 23%, rgba(167,40,40,1) 92%);
+  background: var(--background);
+  background: var(--gradient);
   transition: 0.5s;
-  z-index: var(--i);
   animation: animate 5s ease-in-out infinite;
   animation-delay: calc(-1s * var(--i));
  }
  span:hover {
-  background: rgb(45,126,208); 
+  background: var(--background);
   transition: 0s;
  }
 
@@ -78,10 +66,10 @@
   left: -25px;
   height: 100%;
   width: 25px;
-  background: rgb(45,126,208);
-  background: linear-gradient(90deg, rgba(45,126,208,0.8001794467787114) 23%, rgba(167,40,40,1) 92%);
+  background: var(--background);
+  background: var(--gradient);
   transform-origin: right;
-  transform: skewY(45deg);
+  transform: skewY(var(--skewX));
   transition: 0.5s;
  }
 
@@ -99,9 +87,9 @@
   height: 25px;
   background: red;
   transform-origin: bottom;
-  transform: skewX(45deg);
-  background: rgb(45,126,208);
-  background: linear-gradient(90deg, rgba(45,126,208,0.8001794467787114) 23%, rgba(167,40,40,1) 92%);
+  transform: skewX(var(--skewX));
+  background: var(--background);
+  background: var(--gradient);
  }
 
  span:hover::after {
